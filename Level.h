@@ -2,21 +2,34 @@
 #define LEVEL_H
 
 #include <vector>
+#include <string>
 #include "Enemy.h"
 #include "Item.h"
 #include "Player.h"
 
-// Represents a game level
+// Represents a single level in the game
 class Level {
-public:
-    std::vector<Enemy> enemies;  
-    std::vector<Item> items;     
-    int levelNumber;             
+private:
+    int levelNumber;                      // Level index
+    std::vector<Enemy*> enemies;         // Dynamic list of enemies
+    std::vector<Item> items;             // Collectible items in the level
 
-    Level(int levelNumber);
-    bool isCleared();  // Check if level is completed
-    Enemy* getNextEnemy();
-    void awardItem(Player* player);  // Award items to player
+public:
+    Level(int number);
+    ~Level();                            // Properly clean up dynamically allocated memory
+
+    bool isCleared() const;              // Check if level is completed (no alive enemies)
+    Enemy* getNextEnemy();               // Return pointer to next alive enemy
+    void awardItemsToPlayer(Player* player); // Give level items to player
+    void displayLevelInfo() const;       // Display summary of level
+
+    // For testing or future saving:
+    int getEnemyCount() const;
+    int getItemCount() const;
+};
+
+#endif
+
 };
 
 #endif
