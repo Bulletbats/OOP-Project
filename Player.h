@@ -6,15 +6,19 @@
 
 using namespace std;
 
-class Player : public Character {
+class Player : public Character
+{
 
-    public:
+public:
     Player();
     Player(string name, int health, int level);
 
-    void attack(Character* opponent,  int damage) override ;
+    void attack(Character *opponent, int damage) override;
     void takeDamage(int damage) override;
-    
+
+    void addItem(const Item &item) override;
+    void printInventory() const override;
+
     ~Player() {};
 };
 

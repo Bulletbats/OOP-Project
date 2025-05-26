@@ -15,14 +15,14 @@ void Game::startGame() {
     std::cout << "Welcome to the Roguelike RPG Game!\n";
     while (!gameOver && currentLevel < levels.size()) {
         Level& level = levels[currentLevel];
-        std::cout << "\nEntering Level " << level.levelNumber << "\n";
+        std::cout << "\nEntering Level " << level.getLevelNumber() << "\n";
         while (!level.isCleared() && !gameOver) {
             Enemy* enemy = level.getNextEnemy();
             if (enemy != nullptr) {
                 bool playerWon = combatSystem.resolveCombat(&player, enemy);
                 if (playerWon) {
                     std::cout << "You defeated " << enemy->getName() << "!\n";
-                    level.enemies.erase(level.enemies.begin());  // Remove defeated enemy
+                    level.getEnemies().erase(level.getEnemies().begin());  // Remove defeated enemy
                 } else {
                     std::cout << "You were defeated by " << enemy->getName() << ".\n";
                     gameOver = true;
@@ -30,8 +30,8 @@ void Game::startGame() {
             }
         }
         if (level.isCleared()) {
-            std::cout << "You cleared Level " << level.levelNumber << "!\n";
-            level.awardItem(&player);  // Award items for level completion
+            std::cout << "You cleared Level " << level.getLevelNumber() << "!\n";
+            level.awardItems(&player);  // Award items for level completion
             currentLevel++;
         }
     }

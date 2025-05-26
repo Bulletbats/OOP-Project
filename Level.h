@@ -20,16 +20,15 @@ public:
 
     bool isCleared() const;              // Check if level is completed (no alive enemies)
     Enemy* getNextEnemy();               // Return pointer to next alive enemy
-    void awardItemsToPlayer(Player* player); // Give level items to player
+    void awardItems(Player* player); // Give level items to player
     void displayLevelInfo() const;       // Display summary of level
 
     // For testing or future saving:
     int getEnemyCount() const;
     int getItemCount() const;
-};
 
-#endif
-
+    std::vector<Enemy*> getEnemies() {return enemies;};
+    int getLevelNumber() {return levelNumber;};
 };
 
 #endif

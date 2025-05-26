@@ -9,6 +9,7 @@ class CombatSystem {
 public:
     bool resolveCombat(Player* player, Enemy* enemy);  // Resolve a combat round
     void displayCombatStatus(Player* player, Enemy* enemy);  // Show combat status
+    void useItem(Player* player, int index);
 };
 
 #endif

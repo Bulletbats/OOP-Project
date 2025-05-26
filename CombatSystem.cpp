@@ -19,18 +19,18 @@ bool CombatSystem::resolveCombat(Player* player, Enemy* enemy) {
         if (choice == 1) {
             player->attack(enemy, player->getAttackPower());  // Player attacks
         } else if (choice == 2) {
-            if (player->inventory.empty()) {
+            if (player->getInventory().empty()) {
                 std::cout << "No items in inventory.\n";
             } else {
                 std::cout << "Inventory:\n";
-                for (size_t i = 0; i < player->inventory.size(); ++i) {
-                    std::cout << i + 1 << ". " << player->inventory[i].name << "\n";
+                for (size_t i = 0; i < player->getInventory().size(); ++i) {
+                    std::cout << i + 1 << ". " << player->getInventory()[i].get_name() << "\n";
                 }
                 std::cout << "Choose item to use: ";
                 int itemIndex;
                 std::cin >> itemIndex;
-                if (itemIndex >= 1 && itemIndex <= player->inventory.size()) {
-                    player->useItem(itemIndex - 1);  // Use selected item
+                if (itemIndex >= 1 && itemIndex <=  player->getInventory().size()) {
+                    useItem(player, itemIndex - 1);  // Use selected item
                 } else {
                     std::cout << "Invalid choice.\n";
                 }
@@ -43,4 +43,17 @@ bool CombatSystem::resolveCombat(Player* player, Enemy* enemy) {
         }
     }
     return player->is_alive();  // Return true if player survives
+}
+
+void CombatSystem::useItem(Player* player, int index)
+{
+    if (index >= 0 && index < player->getInventory().size())
+    {
+        player->getInventory()[index].applyEffect(player);
+        player->getInventory().erase(player->getInventory().begin() + index);
+    }
+    else
+    {
+        std::cout << "[ERROR] Invalid item index.\n";
+    }
 }

@@ -16,7 +16,7 @@ Level::Level(int number) : levelNumber(number) {
         enemies.back()->setAttackPower(7);
         items.push_back(Item("Sword", "weapon", 10));
     } else if (levelNumber == 3) {
-        enemies.push_back(new Enemy("Dragon", 100, 3, true));
+        enemies.push_back(new Enemy("Dragon", 100, 3));
         enemies.back()->setAttackPower(15);
         items.push_back(Item("Mega Potion", "heal", 50));
     }
@@ -43,7 +43,7 @@ Enemy* Level::getNextEnemy() {
     return nullptr;
 }
 
-void Level::awardItemsToPlayer(Player* player) {
+void Level::awardItems(Player* player) {
     for (auto& item : items) {
         player->addItem(item);
     }
@@ -54,7 +54,7 @@ void Level::displayLevelInfo() const {
     std::cout << "Level " << levelNumber << " Summary:\n";
     std::cout << "Enemies remaining: ";
     for (const auto& e : enemies) {
-        if (e->is_alive()) std::cout << e->get_name() << " ";
+        if (e->is_alive()) std::cout << e->getName() << " ";
     }
     std::cout << "\nItems available: ";
     for (const auto& item : items) {

@@ -41,34 +41,10 @@ public:
     bool is_alive() const { return health > 0; }
 
     // Inventory commands
-    void addItem(const Item& item) {
-        inventory.push_back(item);
-        std::cout << "[INFO] " << item.get_name() << " added to inventory.\n";
-    }
+    virtual void addItem(const Item& item) {}
+    virtual void printInventory() const {}
 
-    void useItem(int index) {
-        if (index >= 0 && index < inventory.size()) {
-            inventory[index].applyEffect(this);
-            inventory.erase(inventory.begin() + index);
-        } else {
-            std::cout << "[ERROR] Invalid item index.\n";
-        }
-    }
-
-    void printInventory() const {
-        if (inventory.empty()) {
-            std::cout << "[INFO] Inventory is empty.\n";
-            return;
-        }
-        std::cout << "[Inventory]\n";
-        for (size_t i = 0; i < inventory.size(); ++i) {
-            std::cout << i + 1 << ". " << inventory[i].get_name() << " (" << inventory[i].get_type() << ", Effect: " << inventory[i].get_effect_value() << ")\n";
-        }
-    }
-
-    std::vector<Item>& getInventory() {
-        return inventory;
-    }
+    std::vector<Item>& getInventory() {return inventory;}
 
     // Status print
     void printStatus() const {
