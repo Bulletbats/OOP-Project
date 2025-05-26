@@ -1,5 +1,6 @@
 #include "Level.h"
 #include <iostream>
+#include "BossEnemy.h"
 
 Level::Level(int number) : levelNumber(number) {
     if (levelNumber == 1) {
