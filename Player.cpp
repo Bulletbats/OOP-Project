@@ -37,7 +37,7 @@ void Player::takeDamage(int damage)
 void Player::addItem(const Item &item)
 {
     inventory.push_back(item);
-    std::cout << "[INFO] " << item.get_name() << " added to inventory.\n";
+    std::cout << "[INFO] " << item.get_name() << " added to " << this->getName() << " inventory.\n";
 }
 
 void Player::printInventory() const

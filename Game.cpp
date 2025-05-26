@@ -3,7 +3,7 @@
 
 // Constructor: Initialize game state
 Game::Game() : currentLevel(0), gameOver(false) {
-    player = Player("Hero", 100, 1);
+    Player player("Hero", 100, 1);
     player.setAttackPower(10);
     levels.push_back(Level(1));
     levels.push_back(Level(2));
